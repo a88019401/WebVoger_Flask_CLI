@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <title>仿 ChatGPT 對話介面</title>
+  <style>
+    body { font-family: sans-serif; max-width: 700px; margin: auto; padding: 2rem; background: #f7f7f7; }
+    #chatBox div { margin: 10px 0; padding: 10px; border-radius: 8px; }
+    .user { background: #d2e3fc; text-align: right; }
+    .bot { background: #e2e2e2; text-align: left; }
+  </style>
+</head>
+<body>
+  <h1>AI 助教對話介面</h1>
+  <div id="chatBox"></div>
+  <input id="input" type="text" placeholder="輸入任務問題，如：banana 是什麼意思" style="width: 70%;">
+  <button onclick="sendMessage()">送出</button>
+
+  <script>async function sendMessage() {
+    const input = document.getElementById('input');
+    const userInput = input.value.trim();
+    if (!userInput) return;
+  
+    const chatBox = document.getElementById("chatBox");
+    chatBox.innerHTML += `<div class="user">🙋‍♂️ ${userInput}</div>`;
+    input.value = '';
+  
+    const prompt = `請幫我查 '${userInput}' 的意思，並給我一個例句。`;
+  
+    try {
+      const res = await fetch('/submit_task', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt }) // ✅ 一定要是 prompt
+      });
+  
+      const data = await res.json();
+  
+      chatBox.innerHTML += `<div class="bot">🤖 ${data.response.replaceAll('\\n', '<br>')}</div>`;
+  
+      if (data.image_path) {
+        chatBox.innerHTML += `<img src="${data.image_path}" style="max-width: 100%; margin-top: 1rem;">`;
+      }
+    } catch (err) {
+      chatBox.innerHTML += `<div class="bot">⚠️ 錯誤：${err.message}</div>`;
+    }
+  }
+  
+  </script>
+  
+</body>
+<!-- 放在 <head> 或 </body> 結尾 -->
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+</html>

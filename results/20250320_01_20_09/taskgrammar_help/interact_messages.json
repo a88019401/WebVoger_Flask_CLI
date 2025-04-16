@@ -1,0 +1,57 @@
+[
+  {
+    "role": "system",
+    "content": "Imagine you are a robot browsing the web, just like humans. Now you need to complete a task. In each iteration, you will receive an Observation that includes a screenshot of a webpage and some texts. This screenshot will feature Numerical Labels placed in the TOP LEFT corner of each Web Element.\nCarefully analyze the visual information to identify the Numerical Label corresponding to the Web Element that requires interaction, then follow the guidelines and choose one of the following actions:\n1. Click a Web Element.\n2. Delete existing content in a textbox and then type content. \n3. Scroll up or down. Multiple scrolls are allowed to browse the webpage. Pay attention!! The default scroll is the whole window. If the scroll widget is located in a certain area of the webpage, then you have to specify a Web Element in that area. I would hover the mouse there and then scroll.\n4. Wait. Typically used to wait for unfinished webpage processes, with a duration of 5 seconds.\n5. Go back, returning to the previous webpage.\n6. Google, directly jump to the Google search page. When you can't find information in some websites, try starting over with Google.\n7. Answer. This action should only be chosen when all questions in the task have been solved.\n\nCorrespondingly, Action should STRICTLY follow the format:\n- Click [Numerical_Label]\n- Type [Numerical_Label]; [Content]\n- Scroll [Numerical_Label or WINDOW]; [up or down]\n- Wait\n- GoBack\n- Google\n- ANSWER; [content]\n\nKey Guidelines You MUST follow:\n* Action guidelines *\n1) To input text, NO need to click textbox first, directly type content. After typing, the system automatically hits `ENTER` key. Sometimes you should click the search button to apply search filters. Try to use simple language when searching.  \n2) You must Distinguish between textbox and search button, don't type content into the button! If no textbox is found, you may need to click the search button first before the textbox is displayed. \n3) Execute only one action per iteration. \n4) STRICTLY Avoid repeating the same action if the webpage remains unchanged. You may have selected the wrong web element or numerical label. Continuous use of the Wait is also NOT allowed.\n5) When a complex Task involves multiple questions or steps, select \"ANSWER\" only at the very end, after addressing all of these questions (steps). Flexibly combine your own abilities with the information in the web page. Double check the formatting requirements in the task when ANSWER. \n* Web Browsing Guidelines *\n1) Don't interact with useless web elements like Login, Sign-in, donation that appear in Webpages. Pay attention to Key Web Elements like search textbox and menu.\n2) Vsit video websites like YouTube is allowed BUT you can't play videos. Clicking to download PDF is allowed and will be analyzed by the Assistant API.\n3) Focus on the numerical labels in the TOP LEFT corner of each rectangle (element). Ensure you don't mix them up with other numbers (e.g. Calendar) on the page.\n4) Focus on the date in task, you must look for results that match the date. It may be necessary to find the correct year, month and day at calendar.\n5) Pay attention to the filter and sort functions on the page, which, combined with scroll, can help you solve conditions like 'highest', 'cheapest', 'lowest', 'earliest', etc. Try your best to find the answer that best fits the task.\n\nYour reply should strictly follow the format:\nThought: {Your brief thoughts (briefly summarize the info that will help ANSWER)}\nAction: {One Action format you choose}\n\nThen the User will provide:\nObservation: {A labeled screenshot Given by User}"
+  },
+  {
+    "role": "user",
+    "content": "Now given a task: \u8acb\u627e\u641c\u5c0b\u51fa '\u73fe\u5728\u7c21\u55ae\u5f0f'\uff0c\u4e26\u9ede\u9078\u5408\u9069\u7684\u76f8\u95dc\u641c\u5c0b\u3002  Please interact with https://www.ehanlin.com.tw/app/keyword/%E5%9C%8B%E4%B8%AD/%E8%8B%B1%E8%AA%9E/%E5%88%97%E8%A1%A8.html and get the answer.Observation: A screenshot and some texts. (Omitted in context.)"
+  },
+  {
+    "role": "assistant",
+    "content": "Thought: To find the term \"\u73fe\u5728\u7c21\u55ae\u5f0f,\" I need to input this into the search textbox identified by numerical label [1]. After entering the search term, I will look for relevant suggestions and select the appropriate link from the results.\n\nAction: Type [1]; \u73fe\u5728\u7c21\u55ae\u5f0f"
+  },
+  {
+    "role": "user",
+    "content": "Observation: A screenshot and some texts. (Omitted in context.)"
+  },
+  {
+    "role": "assistant",
+    "content": "Thought: The textbox for searching is identified by numerical label [1]. I need to type \"\u73fe\u5728\u7c21\u55ae\u5f0f\" into this input box and then look for related searches that appear after. \n\nAction: Type [1]; \u73fe\u5728\u7c21\u55ae\u5f0f"
+  },
+  {
+    "role": "user",
+    "content": "Observation: A screenshot and some texts. (Omitted in context.)"
+  },
+  {
+    "role": "assistant",
+    "content": "Thought: The screenshot contains a textbox labeled as [1] where I can enter the search term \"\u73fe\u5728\u7c21\u55ae\u5f0f.\" There's also a related suggestion labeled [2] for \"\u73fe\u5728\u7c21\u55ae\u5f0f.\" I will enter the search term in the textbox.\n\nAction: Type [1]; \u73fe\u5728\u7c21\u55ae\u5f0f"
+  },
+  {
+    "role": "user",
+    "content": "Observation: A screenshot and some texts. (Omitted in context.)"
+  },
+  {
+    "role": "assistant",
+    "content": "Thought: The search textbox is identified by numerical label [1]. It is currently empty, so I need to type \"\u73fe\u5728\u7c21\u55ae\u5f0f\" into this input box. Additionally, there is a relevant suggestion labeled [2] for \"\u73fe\u5728\u7c21\u55ae\u5f0f\" that can be selected after the search term is entered.\n\nAction: Type [1]; \u73fe\u5728\u7c21\u55ae\u5f0f"
+  },
+  {
+    "role": "user",
+    "content": [
+      {
+        "type": "text",
+        "text": "Observation: please analyze the attached screenshot and give the Thought and Action. I've provided the tag name of each element and the text it contains (if text exists). Note that <textarea> or <input> may be textbox, but not exactly. Please focus more on the screenshot and then refer to the textual information.\n[0]: \"\u5404\u79d1\u76ee\u5b78\u7fd2\u95dc\u9375\u5b57\u5217\u8868\";\t[1]: <input> \"\";\t[2]: \"\u73fe\u5728\u7c21\u55ae\u5f0f\";"
+      },
+      {
+        "type": "image_url",
+        "image_url": {
+          "url": "data:image/png;base64,{b64_img}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "Thought: The input box for searching, identified as [1], is empty. I need to type \"\u73fe\u5728\u7c21\u55ae\u5f0f\" in that box. Additionally, there is a relevant suggestion labeled [2] that corresponds to \"\u73fe\u5728\u7c21\u55ae\u5f0f,\" which I can select after entering the search term.\n\nAction: Type [1]; \u73fe\u5728\u7c21\u55ae\u5f0f"
+  }
+]

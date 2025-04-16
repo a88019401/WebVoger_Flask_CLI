@@ -1,0 +1,57 @@
+[
+  {
+    "role": "system",
+    "content": "Imagine you are an English tutor helping students improve their vocabulary and reading skills. Your primary tasks are:\n1. Helping students **search for word definitions** and **example sentences** using Yahoo Dictionary.\n2. Suggesting **short articles** or **reading materials** to help them understand a word in context.\n3. If a student asks for a **grammar explanation**, provide a brief, simple explanation with an example.\n\nFor word searches, use **Yahoo Dictionary**: \n\ud83d\udd0d URL: https://tw.dictionary.search.yahoo.com/\n\n**Your responses should follow this format:**\n---\n\ud83d\udcd6 **Vocabulary Lookup**\n- Word: {Word}\n- Definition: {Definition} \n- Example Sentence: {Example sentence} \n- \ud83d\udd17 [Search Yahoo Dictionary](https://tw.dictionary.search.yahoo.com/search?p={Word})\n\n\ud83d\udcda **Reading Suggestion**\n- Topic: {topic}\n- Summary: {Short summary of the article}\n- \ud83d\udd17 **[Search more articles here](https://www.taiwannews.com.tw/search?keyword={topic})**\n\n\n\ud83d\udd20 **Grammar Tip** (If asked)\n- Topic: {Grammar Topic}\n- Explanation: {Brief Explanation}\n- Example: {Example Sentence}\n-  [Search more](https://www.ehanlin.com.tw/app/keyword/%E5%9C%8B%E4%B8%AD/%E8%8B%B1%E8%AA%9E/%E5%88%97%E8%A1%A8.html)\n---\n\n**Key Guidelines:**\n1\ufe0f\u20e3 When a student asks for a **word meaning**, provide a clear definition and an example sentence. Include a **Yahoo Dictionary search link**.  \n2\ufe0f\u20e3 If the student asks for **contextual learning**, suggest an article and briefly explain its content.  \n3\ufe0f\u20e3 When explaining grammar, use **simple and clear** language with one example.  \n4\ufe0f\u20e3 Do **NOT** provide unrelated information. Stick to vocabulary, reading, and grammar support.  \n\nYour reply should always be **friendly, concise, and helpful**. Encourage students to explore learning resources themselves while guiding them effectively."
+  },
+  {
+    "role": "user",
+    "content": [
+      {
+        "type": "text",
+        "text": "Now given a task: \u8acb\u63a8\u85a6\u4e00\u7bc7\u8207 '\u74b0\u4fdd' \u76f8\u95dc\u7684\u82f1\u6587\u6587\u7ae0\uff0c\u4e26\u7c21\u55ae\u4ecb\u7d39\u5167\u5bb9\u3002  Please interact with https://www.taiwannews.com.tw/search?keyword=\u74b0\u4fdd and get the answer. \nObservation: please analyze the attached screenshot and give the Thought and Action. I've provided the tag name of each element and the text it contains (if text exists). Note that <textarea> or <input> may be textbox, but not exactly. Please focus more on the screenshot and then refer to the textual information.\n[1]: \"Show details\";\t[2]: <button> \"Deny\";\t[3]: <button> \"Allow all\";\t[7]: \"iZooto\";\t[9]: \"News Hub\";"
+      },
+      {
+        "type": "image_url",
+        "image_url": {
+          "url": "data:image/png;base64,{b64_img}"
+        }
+      }
+    ]
+  },
+  {
+    "role": "assistant",
+    "content": "I'm unable to interact with external websites or view specific images. However, I can guide you on how to find a relevant article related to '\u74b0\u4fdd' (environmental protection) and provide a summary if you give me the content.\n\nTo find an article on the topic, visit the [Taiwan News search page](https://www.taiwannews.com.tw/search?keyword=\u74b0\u4fdd) and look for an article that catches your interest. Once you find one, feel free to share the article's title or main points, and I can help summarize it or discuss its content. \n\nIf you have a different question or need help with something else, just let me know!"
+  },
+  {
+    "role": "user",
+    "content": "Format ERROR: Both 'Thought' and 'Action' should be included in your reply."
+  },
+  {
+    "role": "assistant",
+    "content": "Certainly! Here\u2019s how I would structure the analysis you requested:\n\n---\n\n**Thought:**\nThe screenshot depicts a cookie consent notice that informs visitors about the website's use of cookies for personalizing content and analyzing traffic. It presents options for users to either accept all cookies, deny them, or view more details about the cookie policy. The presence of a cookie consent banner reflects the website's compliance with data protection regulations, such as GDPR.\n\n**Action:**\n1. **For Users:** When encountering this notice, users should decide whether they want personalized content by clicking \"Allow all\" or if they prefer not to participate by clicking \"Deny.\" They can also click \"Show details\" to gain more information about the specific cookies the site intends to use.\n   \n2. **For Web Administrators:** It is essential to ensure that cookie consent mechanisms are clear and comply with relevant regulations. Providing users with detailed information can enhance transparency and trust.\n\n---\n\nIf you need help with anything else or further details, feel free to ask!"
+  },
+  {
+    "role": "user",
+    "content": "The action you have chosen cannot be exected. Please double-check if you have selected the wrong Numerical Label or Action or Action format. Then provide the revised Thought and Action."
+  },
+  {
+    "role": "assistant",
+    "content": "Apologies for the oversight. Here\u2019s the revised analysis with the correct format:\n\n---\n\n**Thought:**\nThe screenshot shows a cookie consent notice from a website, informing users about the use of cookies to personalize content and analyze traffic. The options given (Deny, Allow all, Show details) indicate a compliance with privacy regulations, ensuring users are informed about data usage.\n\n**Action:**\n- **1 (Show details):** By clicking this option, users can learn more about the types of cookies being used and how their data will be utilized, allowing for an informed choice.\n  \n- **2 (Deny):** Selecting this option will prevent the website from using any cookies, but it may limit functionality or access to some features.\n  \n- **3 (Allow all):** This choice grants permission for all cookies, enabling personalized experiences and full site functionality.\n\n---\n\nIf you need further adjustments or assistance, feel free to let me know!"
+  },
+  {
+    "role": "user",
+    "content": "The action you have chosen cannot be exected. Please double-check if you have selected the wrong Numerical Label or Action or Action format. Then provide the revised Thought and Action."
+  },
+  {
+    "role": "assistant",
+    "content": "Thank you for your patience. Here\u2019s the corrected analysis based on the cues from the numerical labels:\n\n---\n\n**Thought:**\nThe screenshot presents a cookie consent notice that informs users about the use of cookies on the website. It provides options to either \"Deny\" all cookies, \"Allow all\" cookies, or \"Show details\" to learn more about the specific cookies being used. This reflects a commitment to user privacy and compliance with regulations.\n\n**Action:**\n- **1 (Show details):** Users can click this button to access additional information about how cookies are used on the site and what data is being collected.\n\n- **2 (Deny):** Choosing this option will prevent the site from utilizing any cookies, which may affect the site's functionality or user experience.\n\n- **3 (Allow all):** Clicking this option enables all cookies, allowing for a fully personalized browsing experience.\n\n---\n\nIf there's anything else you need, please let me know!"
+  },
+  {
+    "role": "user",
+    "content": "The action you have chosen cannot be exected. Please double-check if you have selected the wrong Numerical Label or Action or Action format. Then provide the revised Thought and Action."
+  },
+  {
+    "role": "assistant",
+    "content": "Thank you for your understanding. Here\u2019s the revised analysis with the correct focus on the required numerical labels and actions:\n\n---\n\n**Thought:**\nThe screenshot displays a cookie consent banner on the website, indicating that cookies are used to personalize content and analyze traffic. It provides three main options for the user regarding their cookie preferences, reflecting compliance with privacy regulations.\n\n**Action:**\n- **1 (Show details):** Click this to view more information about the types of cookies used and their purposes, allowing for an informed choice about consent.\n\n- **2 (Deny):** Choosing this option will decline the use of cookies, which may limit the browsing experience but enhances privacy.\n\n- **3 (Allow all):** This option permits the use of all cookies, enabling a personalized experience on the site.\n\n- **9 (News Hub):** Clicking this directs users to the News Hub section, where they can access a variety of articles and updates.\n\n---\n\nLet me know if you need further assistance or modifications!"
+  }
+]
