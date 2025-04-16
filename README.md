@@ -1,82 +1,102 @@
-🛠️ WebVoyager + Flask 開發者指南
-📅 最後更新：2025/4/17
-👨‍💻 負責人：Jimmy 
-(這次添加得太多了，我就不附上程式碼了)
+# 🛠️ WebVoyager + Flask 開發者指南
 
-🔧 專案說明
-本專案結合了 Selenium + OpenAI GPT-4V + Flask + JS 前端，實作一個 仿 ChatGPT 對話框 + 任務型瀏覽 AI 助手。
-使用者可在對話介面輸入英文學習任務（如查單字、找例句、學文法），GPT 回答後自動串接 WebVoyager 機制，進行進一步搜尋與分析。
+📅 最後更新：2025/4/17  
+👨‍💻 負責人：Jimmy  
+> （這次添加得太多了，我就不附上程式碼了）
 
-🧩 系統架構與流程說明
-1. 使用者流程
+---
+
+## 🔧 專案說明
+
+本專案結合了 `Selenium + OpenAI GPT-4V + Flask + JS 前端`，  
+實作一個 **仿 ChatGPT 對話框 + 任務型瀏覽 AI 助手**。  
+
+使用者可在對話介面輸入英文學習任務（如查單字、找例句、學文法），  
+GPT 回答後自動串接 WebVoyager 機制，進行進一步搜尋與分析。
+
+---
+
+## 🧩 系統架構與流程說明
+
+### 使用者流程
+
 使用者輸入問題 →GPT 回覆內容（/ask_gpt）→該回覆當作任務經過第二次AI思考後作為 prompt 送出 →WebVoyager 以 Selenium 模擬搜尋並擷取畫面 →GPT-4V 分析畫面，回傳新回答與操作 →顯示結果與圖像。
 
-🧠 技術堆疊
-Flask：API 路由處理（/ask_gpt, /submit_task）
 
-Selenium WebDriver：模擬瀏覽器互動行為（點擊、輸入、滾動）
+### 技術堆疊
 
-OpenAI GPT-4 Vision：分析 screenshot 並提供具體操作指令
+- **Flask**：API 路由處理（`/ask_gpt`, `/submit_task`）  
+- **Selenium WebDriver**：模擬瀏覽器互動行為（點擊、輸入、滾動）  
+- **OpenAI GPT-4 Vision**：分析 screenshot 並提供具體操作指令  
+- **HTML + JS (script.js)**：前端對話介面與 fetch 非同步任務串接  
+- **多輪任務流程與畫面快照**：自動儲存為 `screenshot{編號}.png`，供 AI 逐步觀察  
 
-HTML + JS (script.js)：前端對話介面與 fetch 非同步任務串接
+---
 
-多輪任務流程與畫面快照：自動儲存為 screenshot{編號}.png，供 AI 逐步觀察
+## 💡 核心功能實作新增
 
-💡 核心功能實作新增
+| 功能名稱               | 說明 |
+|------------------------|------|
+| `ask_gpt`              | 將使用者問題送至 GPT 模型，取得自然語言回覆。 |
+| `submit_task`          | 將 GPT 回覆作為 prompt，送入 WebVoyager 進行模擬網頁操作任務。 |
+| `run_single_task()`    | 依據 GPT 回覆內容，自動搜尋、擷取、分析畫面並回傳結果。 |
+| 多圖任務支援           | 每輪操作皆擷取畫面為 `screenshot{it}.png`，AI 可逐步觀察。 |
+| CLI + Flask 雙模式支援 | 使用 `if 'flask' in sys.argv:` 智慧切換 CLI / Web UI 模式。 |
 
-功能名稱 | 說明
-ask_gpt | 將使用者問題送至 GPT 模型，取得自然語言回覆。
-submit_task | 將 GPT 回覆作為 prompt，送入 WebVoyager 進行模擬網頁操作任務。
-run_single_task() | 依據 GPT 回覆內容，自動搜尋、擷取、分析畫面並回傳結果。
-多圖任務支援 | 每輪操作皆擷取畫面，命名為 screenshot{it}.png，讓 AI 可以逐步觀察。
-CLI + Flask 雙模式支援 | 使用 if 'flask' in sys.argv: 可智慧切換為 CLI 模式或 Web 伺服器模式。
+---
 
-⚠️ 開發過程中遇到的問題與解法
-1. UI 中的 fetch 未正確包裝成 prompt 對應格式
-問題：AI 回覆無法被 WebVoyager 正確解析與執行。
+## ⚠️ 開發過程中遇到的問題與解法
 
-解法：補上 prompt: aiReply 為 POST 請求 body，成功完成「AI 回答 → 任務驅動」的閉環。
+### 🔸 UI 中的 fetch 未正確包裝成 prompt 對應格式
 
-2. Flask + CLI 同時維運問題
-問題：指令模式與 Flask UI 共用同一份程式，導致執行衝突。
+- **問題**：AI 回覆無法被 WebVoyager 正確解析與執行  
+- **解法**：補上 `prompt: aiReply` 作為 POST 請求 body，成功閉環任務驅動流程  
 
-解法：使用 if 'flask' in sys.argv: 判斷執行模式，讓 CLI 與 UI 可以共存運行。
+---
 
-3. 使用者對話 → GPT 回應 → 再送入 WebVoyager 流程設計困難
-問題：
+### 🔸 Flask + CLI 同時維運問題
 
-JS 的 fetch() 非同步調用順序不明確
+- **問題**：指令模式與 Flask UI 共用同一份程式，導致執行衝突  
+- **解法**：使用 `if 'flask' in sys.argv:` 判斷執行模式，CLI 與 UI 可以共存  
 
-async/await 的結構與錯誤處理不直觀
+---
 
-JSON 結果需拆解兩層才能抓到 image_path 與 response
+### 🔸 非同步流程設計困難（使用者對話 → GPT → WebVoyager）
 
-解法：明確拆解流程步驟，JS 中分兩階段發送 API 請求，並對回傳做判斷與錯誤提示。
+- **問題**：
+  - `fetch()` 非同步調用順序不明確  
+  - `async/await` 結構與錯誤處理不直觀  
+  - JSON 結果需拆解兩層才能抓到 `image_path` 與 `response`  
+- **解法**：JS 中分兩階段 API 請求，並對回傳做明確判斷與錯誤提示  
 
-4. Flask 模式下 Selenium 無法觸發 click/type/scroll
-問題：AI 回傳的操作指令正確，但 Selenium 無法執行。
+---
 
-解法：
+### 🔸 Flask 模式下 Selenium 無法觸發 click/type/scroll
 
-加入 driver_task.switch_to.window(...) 切換當前控制視窗
+- **問題**：AI 回傳操作指令正確，但 Selenium 無法執行  
+- **解法**：
+  - 加入 `driver_task.switch_to.window(...)` 切換控制視窗  
+  - 檢查 label 與元素對應  
+  - 加入 log 記錄，成功觸發所有操作  
 
-檢查 label 與元素對應
+---
 
-加入 log 紀錄分析流程
+### 🔸 `exec_action_type` 判斷失誤
 
-最終成功觸發所有操作指令
+- **問題**：部分元素無法輸入文字，AI 預測錯誤或元素類型錯誤  
+- **解法**：加上 `outerHTML` 輸出除錯，確認是否為 `<textarea>` 或可輸入元素  
 
-5. exec_action_type 判斷失誤
-問題：部分元素無法輸入文字，AI 預測錯誤或元素類型錯誤。
+---
 
-解法：加上 outerHTML 輸出除錯，快速確認該元素是否為可輸入的 <input> 或 <textarea>。
+### 🔸 AI 一直回傳 `screenshot1.png`
 
-6. AI 一直回傳 screenshot1.png
-問題：每輪疊代都覆蓋 screenshot 檔案，回傳總是第一張圖。
+- **問題**：每輪迭代都覆蓋 screenshot 檔案  
+- **解法**：改為 `screenshot{it}.png` 並正確指定 `it` 為迴圈結尾次數  
 
-解法：將儲存名稱改為 screenshot{it}.png 並於結尾正確指定 it 為最後一輪的迭代數。
+---
 
-📁 專案結構建議
+## 📁 專案結構建議
+
 
 WebVoyager_Enhanced/
 │
@@ -88,13 +108,19 @@ WebVoyager_Enhanced/
 ├── .env                    # API 設定檔
 ├── README.md               # 專案說明文件
 ├── DEVELOPER_GUIDE.md      # 開發者指南（本文件）
-✅ 執行方式
-啟動 Web UI 模式（Flask）：
+
+---
+
+## ✅ 執行方式
+
+### 啟動 Web UI 模式（Flask）：
 
 python run.py flask
-使用 CLI 模式：
 
+### 使用 CLI 模式：
 python run.py
+
+
 
 
 
